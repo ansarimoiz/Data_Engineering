@@ -67,17 +67,17 @@ In this step, I loaded the CSV file into Google Colab and carried out data clean
 1. Converted `tpep_pickup_datetime` and `tpep_dropoff_datetime` columns into datetime format.
 2. Removed duplicates and reset the index.-->
 
-Link to the script: [https://colab.research.google.com/drive/1Y6l2igEKF4lwClUYKAJlfGTjbfdAE_Db?usp=sharing]  
+Link to the script: [Data Engineering](https://colab.research.google.com/drive/1Y6l2igEKF4lwClUYKAJlfGTjbfdAE_Db?usp=sharing)
 
-<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/Uber Project/Assets/data_modelling.png">
+<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/data_modelling.png">
 
 After completing the above steps, I created the fact and dimension tables.
 
-<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/Uber Project/Assets/fact_table.png"
+<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/fact_table.png"
 
 ## Step 2: Storage
 
-<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/Uber Project/Assets/cloud_storage.png"
+<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/cloud_storage.png"
 
 ## Step 3: ETL / Orchestration
 
