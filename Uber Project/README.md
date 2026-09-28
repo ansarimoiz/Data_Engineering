@@ -73,11 +73,11 @@ Link to the script: [Data Engineering](https://colab.research.google.com/drive/1
 
 After completing the above steps, I created the fact and dimension tables.
 
-<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/fact_table.png"
+<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/fact_table.png">
 
 ## Step 2: Storage
 
-<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/cloud_storage.png"
+<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/cloud_storage.png">
 
 ## Step 3: ETL / Orchestration
 
@@ -131,8 +131,9 @@ Before executing the Load pipeline, I download credentials from Google API & Cre
 
 After running the Load pipeline in Mage, the fact and dim tables are generated in Google BigQuery.
 
-<img width="1438" alt="Screenshot 2023-09-03 at 3 41 57 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/81106f7c-f912-462a-ba74-4b1e22120dc6">
+<img width="1438" alt="Screenshot" src="https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/big_query.png">
 
+<!-- 
 Here's the additional analyses I performed:
 1. Find the top 10 pickup locations based on the number of trips
 <img width="1436" alt="Screenshot 2023-09-03 at 3 46 17 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/87fef0c1-f849-4b0e-8f2d-db68a989a06d">
@@ -142,6 +143,7 @@ Here's the additional analyses I performed:
 
 3. Find the average fare amount by hour of the day:
 <img width="1436" alt="Screenshot 2023-09-03 at 3 48 52 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/bf8d4dea-0915-48fb-a673-e5b3d3f37e3f">
+-->
 
 ## Step 5: Dashboard
 
