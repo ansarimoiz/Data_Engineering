@@ -49,8 +49,8 @@ The following technologies are used to build this project:
 Files in the following stages:
 - Step 1: Cleaning and transformation - [Data Engineering.ipynb](https://colab.research.google.com/drive/1Y6l2igEKF4lwClUYKAJlfGTjbfdAE_Db?usp=sharing)
 - Step 2: Storage
-- Step 3: ETL, Orchestration - Mage: [Extract](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_load_data.py), [Transform](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_transformation.py), [Load](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_gbq_load.py)
-- Step 4: Analytics - [SQL script](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/sql_script.sql)
+- Step 3: ETL, Orchestration - Mage: [Extract](https://github.com/ansarimoiz/Data_Engineering/blob/25f461d67ab55fb2c429a99c19483ad82ead6304/Uber%20Project/Mage/extract_data.py), [Transform](https://github.com/ansarimoiz/Data_Engineering/blob/25f461d67ab55fb2c429a99c19483ad82ead6304/Uber%20Project/Mage/transform_data.py), [Load](https://github.com/ansarimoiz/Data_Engineering/blob/25f461d67ab55fb2c429a99c19483ad82ead6304/Uber%20Project/Mage/load_data.py)
+- Step 4: Analytics - [SQL script](https://github.com/ansarimoiz/Data_Engineering/blob/3a5e0ee52c5497bbe69782e7d72840ae06416683/Uber%20Project/sqL_script.sql)
 - Step 5: [Dashboard](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber_Dashboard.pdf)
 
 ## Data Modeling
