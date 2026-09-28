@@ -131,7 +131,7 @@ Before executing the Load pipeline, I download credentials from Google API & Cre
 
 After running the Load pipeline in Mage, the fact and dim tables are generated in Google BigQuery.
 
-<img width="1438" alt="Screenshot" src="https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/big_query.png">
+<img width="1438" alt="Screenshot" src=" https://github.com/ansarimoiz/Data_Engineering/blob/5611b9abafadaa3518ae5c3ed24b80bb11f35710/Uber%20Project/Assets/big_query.png">
 
 <!-- 
 Here's the additional analyses I performed:
@@ -149,8 +149,8 @@ Here's the additional analyses I performed:
 
 After completing the analysis, I loaded the relevant tables into Looker Studio and created a dashboard, which you can view [here](https://datastudio.google.com/reporting/8e58e478-86ff-4a5a-b824-6c88dc6d1918).
 
-![Dashoard Pg 1](https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/dashboard_1.png)
+![Dashoard Pg 1]( https://github.com/ansarimoiz/Data_Engineering/blob/5611b9abafadaa3518ae5c3ed24b80bb11f35710/Uber%20Project/Assets/dashboard_1.png)
 
-![Dashboard Pg 2](https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/dashboard_2.png)
+![Dashboard Pg 2]( https://github.com/ansarimoiz/Data_Engineering/blob/5611b9abafadaa3518ae5c3ed24b80bb11f35710/Uber%20Project/Assets/dashboard_2.png)
 
 ***
