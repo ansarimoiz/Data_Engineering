@@ -69,11 +69,11 @@ In this step, I loaded the CSV file into Google Colab and carried out data clean
 
 Link to the script: [https://colab.research.google.com/drive/1Y6l2igEKF4lwClUYKAJlfGTjbfdAE_Db?usp=sharing]  
 
-<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/Uber Project/Assets/image.png">
+<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/Uber Project/Assets/data_modelling.png">
 
 After completing the above steps, I created the fact and dimension tables.
 
-<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/Uber Project/Assets/image2.png"
+<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/Uber Project/Assets/fact_table.png"
 
 ## Step 2: Storage
 
