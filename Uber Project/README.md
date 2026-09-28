@@ -119,9 +119,9 @@ mage start demo_project
 3. Next, I conduct orchestration in Mage by accessing the external IP address through a new tab. The link format is: `<external IP address>:<port number>`.
 
 After that, I create a new pipeline with the following stages:
-- Extract: [load_uber_data](https://github.com/ansarimoiz/Data_Engineering/Uber Project/Mage/extract_data.py)  
-- Transform: [transform_uber](https://github.com/ansarimoiz/Data_Engineering/Uber Project/Mage/transform_data.py)
-- Load: [load_gbq](https://github.com/ansarimoiz/Data_Engineering/Uber Project/Mage/load_data.py)
+- Extract: [load_uber_data](https://github.com/ansarimoiz/Data_Engineering/blob/25f461d67ab55fb2c429a99c19483ad82ead6304/Uber%20Project/Mage/extract_data.py)  
+- Transform: [transform_uber](https://github.com/ansarimoiz/Data_Engineering/blob/25f461d67ab55fb2c429a99c19483ad82ead6304/Uber%20Project/Mage/transform_data.py)
+- Load: [load_gbq](https://github.com/ansarimoiz/Data_Engineering/blob/25f461d67ab55fb2c429a99c19483ad82ead6304/Uber%20Project/Mage/load_data.py)
 
 <img width="1438" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ae8acb39-c66e-41f6-b81b-d1179121c0a4">
 
