@@ -1,4 +1,4 @@
-# 🚗 Uber Data Engineering End-to-End Project
+# 🚗 NYC Taxi 2026 Data Engineering End-to-End Project
 
 ## Objective
 
@@ -26,12 +26,12 @@ The sections below will explain additional details on the technologies and files
 
 ## Dataset Used
 
-This project uses the TLC Trip Record Data which include fields capturing pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts.
+This project uses the NYC Taxi Trip Record Data which include fields capturing pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts.
 
 More info about dataset can be found in the following links:
 - Website: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
 - Data Dictionary: https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
-- Raw Data (CSV):  https://github.com/ansarimoiz/Data_Engineering/blob/main/Uber%20Project/uber_data.csv
+<!-- - Raw Data (CSV):  https://github.com/ansarimoiz/Data_Engineering/blob/main/Uber%20Project/uber_data.csv  -->
 
 ## Technologies
 
@@ -47,7 +47,7 @@ The following technologies are used to build this project:
 <img width="897" alt="Screenshot 2023-05-08 at 11 49 09 AM" src="https://user-images.githubusercontent.com/81607668/236729698-65e193bc-75ee-4ea6-9040-f33f5f2958cb.png">
 
 Files in the following stages:
-- Step 1: Cleaning and transformation - [Uber Data Engineering.ipynb](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber%20Data%20Engineering.ipynb)
+- Step 1: Cleaning and transformation - [Data Engineering.ipynb](https://colab.research.google.com/drive/1Y6l2igEKF4lwClUYKAJlfGTjbfdAE_Db?usp=sharing)
 - Step 2: Storage
 - Step 3: ETL, Orchestration - Mage: [Extract](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_load_data.py), [Transform](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_transformation.py), [Load](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_gbq_load.py)
 - Step 4: Analytics - [SQL script](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/sql_script.sql)
