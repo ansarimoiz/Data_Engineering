@@ -69,73 +69,52 @@ In this step, I loaded the CSV file into Google Colab and carried out data clean
 
 Link to the script: [https://colab.research.google.com/drive/1Y6l2igEKF4lwClUYKAJlfGTjbfdAE_Db?usp=sharing]  
 
-<img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/83438f14-cae0-4278-8a33-5b536b487d90">
+<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/Uber Project/Assets/image.png">
 
-After completing the above steps, I created the following fact and dimension tables below:
+After completing the above steps, I created the fact and dimension tables.
 
-<img width="1436" alt="Screenshot 2023-09-03 at 4 05 21 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/d1f961f5-dd28-4a5f-bfc9-1d739b85012c">
-
-
-<img width="1436" alt="Screenshot 2023-09-03 at 4 05 29 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/3265a206-132f-457f-8323-2c6f681fbf60">
-
-
-<img width="1436" alt="Screenshot 2023-09-03 at 4 05 35 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/a0555798-32a7-4c84-ac19-6336868dbf70">
-
-
-<img width="1436" alt="Screenshot 2023-09-03 at 4 05 40 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/f7483917-b5eb-400f-a9ea-8ca138db6604">
-
-
-<img width="1436" alt="Screenshot 2023-09-03 at 4 05 44 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/31fc871f-bdd3-4d2b-a0b5-04227188ec66">
-
-
-<img width="1436" alt="Screenshot 2023-09-03 at 4 05 53 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ec020455-bb23-4be5-b3f9-92200ccebaae">
+<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/Uber Project/Assets/image2.png"
 
 ## Step 2: Storage
 
-<img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/b776b804-a871-4a72-b1e5-b38b6d194bf3">
+<img width="1436" alt="image" src="https://github.com/ansarimoiz/Data_Engineering/Uber Project/Assets/cloud_storage.png"
 
 ## Step 3: ETL / Orchestration
 
 1. Begin by launching the SSH instance and running the following commands below to install the required libraries.
 
-<img width="1436" alt="Screenshot 2023-09-03 at 4 10 39 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/1bd9af4c-61aa-4ea5-a485-81b6a6b5d446">
-
 ```python
 # Install python and pip 
-sudo apt-get install update
+# Update Ubuntu packages
+sudo apt update
+ 
+# Install Python, pip, and tools
+sudo apt install -y python3 python3-pip python3-venv
 
-sudo apt-get install python3-distutils
+# Create a project environment
+python3 -m venv uber-env
 
-sudo apt-get install python3-apt
+# Activate it
+source uber-env/bin/activate
 
-sudo apt-get install wget
+# Upgrade pip  (update pip to latest version)
+python -m pip install --upgrade pip  
 
-wget https://bootstrap.pypa.io/get-pip.py
-
-sudo python3 get-pip.py
-
-# Install Google Cloud Library
-sudo pip3 install google-cloud
-
-sudo pip3 install google-cloud-bigquery
-
-# Install Pandas
-sudo pip3 install pandas
+# Install Python libraries  
+pip install --upgrade pandas  
+pip install --upgrade google-cloud-bigquery
+pip install --upgrade google-cloud-storage
 ```
 
-<img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/3ce67bf1-b965-428e-8412-1efd3ce0c95f">
-
-2. After that, I install the Mage AI library from the [Mage AI GitHub](https://github.com/mage-ai/mage-ai#using-pip-or-conda). Then, I create a new project called "uber_de_project".
+2. After that, I install the Mage AI library from the [Mage AI GitHub](https://github.com/mage-ai/mage-ai#using-pip-or-conda). Then, I create a new project called "nyc_taxi_project".
 
 ```python 
 # Install Mage library
-sudo pip3 install mage-ai
+pip install mage-ai
 
 # Create new project
 mage start demo_project
 ```
-
-<img width="901" alt="Screenshot 2023-09-03 at 3 43 27 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/2cfbdda6-4998-4dff-8c09-2f76c9b8a977">
 
 3. Next, I conduct orchestration in Mage by accessing the external IP address through a new tab. The link format is: `<external IP address>:<port number>`.
 
