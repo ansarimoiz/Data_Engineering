@@ -51,7 +51,7 @@ Files in the following stages:
 - Step 2: Storage
 - Step 3: ETL, Orchestration - Mage: [Extract](https://github.com/ansarimoiz/Data_Engineering/blob/25f461d67ab55fb2c429a99c19483ad82ead6304/Uber%20Project/Mage/extract_data.py), [Transform](https://github.com/ansarimoiz/Data_Engineering/blob/25f461d67ab55fb2c429a99c19483ad82ead6304/Uber%20Project/Mage/transform_data.py), [Load](https://github.com/ansarimoiz/Data_Engineering/blob/25f461d67ab55fb2c429a99c19483ad82ead6304/Uber%20Project/Mage/load_data.py)
 - Step 4: Analytics - [SQL script](https://github.com/ansarimoiz/Data_Engineering/blob/3a5e0ee52c5497bbe69782e7d72840ae06416683/Uber%20Project/sqL_script.sql)
-- Step 5: [Dashboard](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber_Dashboard.pdf)
+- Step 5: [Dashboard](https://datastudio.google.com/reporting/8e58e478-86ff-4a5a-b824-6c88dc6d1918)
 
 ## Data Modeling
 
@@ -147,10 +147,10 @@ Here's the additional analyses I performed:
 
 ## Step 5: Dashboard
 
-After completing the analysis, I loaded the relevant tables into Looker Studio and created a dashboard, which you can view [here](https://lookerstudio.google.com/s/s2Cv9HZiz_I).
+After completing the analysis, I loaded the relevant tables into Looker Studio and created a dashboard, which you can view [here](https://datastudio.google.com/reporting/8e58e478-86ff-4a5a-b824-6c88dc6d1918).
 
-![Dashoard Pg 1](https://user-images.githubusercontent.com/81607668/236729944-0a66f699-689e-4cbb-a12a-860abdef2cf4.png)
+![Dashoard Pg 1](https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/dashboard_1.png)
 
-![Dashboard Pg 2](https://user-images.githubusercontent.com/81607668/236729954-cecba4a6-fc90-4944-b27f-cfb9473422bf.png)
+![Dashboard Pg 2](https://github.com/ansarimoiz/Data_Engineering/blob/3e45722788fca6823c31033a46114e5c045bc305/Uber%20Project/Assets/dashboard_2.png)
 
 ***
