@@ -8,7 +8,7 @@ In this project, I designed and implemented an end-to-end data pipeline that con
 4. Using ETL concept, I orchestrated the data pipeline on Mage AI and loaded the transformed data into Google BigQuery.
 5. Developed a dashboard on Looker Studio.
 
-As this is a data analysis project, my emphasis is primarily on the data exploration and visualization aspect with a lesser emphasis on data engineering.
+As this is a data engineering project, my emphasis is primarily on the engineering aspect with a lesser emphasis on analytics and dashboard development.
 
 The sections below will explain additional details on the technologies and files utilized.
 
@@ -61,13 +61,13 @@ The datasets are designed using the principles of fact and dim data modeling con
 
 ## Step 1: Cleaning and Transformation
 
-In this step, I loaded the CSV file into Jupyter Notebook and carried out data cleaning and transformation activities prior to organizing them into fact and dim tables.
+In this step, I loaded the CSV file into Google Colab and carried out data cleaning and transformation activities prior to organizing them into fact and dim tables.
 
-Here's the specific cleaning and transformation tasks that were performed:
+<!--  Here's the specific cleaning and transformation tasks that were performed:
 1. Converted `tpep_pickup_datetime` and `tpep_dropoff_datetime` columns into datetime format.
-2. Removed duplicates and reset the index.
+2. Removed duplicates and reset the index.-->
 
-Link to the script: [[https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber%20Data%20Engineering.ipynb](https://colab.research.google.com/drive/1Y6l2igEKF4lwClUYKAJlfGTjbfdAE_Db?usp=sharing)](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber%20Data%20Engineering.ipynb)
+Link to the script: [https://colab.research.google.com/drive/1Y6l2igEKF4lwClUYKAJlfGTjbfdAE_Db?usp=sharing]  
 
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/83438f14-cae0-4278-8a33-5b536b487d90">
 
