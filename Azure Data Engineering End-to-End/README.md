@@ -1,16 +1,94 @@
-# NYC Taxi Data Engineering Pipeline — Azure
+# 🚕 NYC Taxi Data Engineering End-to-End Project — Azure
 
-An end-to-end data engineering pipeline built using **Azure Data Factory, Azure Data Lake Storage Gen2, Databricks, PySpark, Azure SQL Database, Synapse Serverless SQL, and Power BI**.
+## Objective
 
-The project processes monthly NYC Yellow Taxi trip data using a **medallion architecture**, moving data from raw ingestion through transformation and dimensional modeling before exposing it through a serverless SQL layer for analytics.
+In this project, I designed and implemented an end-to-end data engineering pipeline using **Microsoft Azure** to process monthly NYC Yellow Taxi trip data.
+
+The pipeline consists of several stages:
+
+1. Extracted monthly NYC Yellow Taxi trip data and ingested it into **Azure Data Lake Storage Gen2** using **Azure Data Factory**.
+2. Implemented parameterized and incremental ingestion using **Azure SQL Database** as a control and audit table.
+3. Cleaned and transformed the data using **Databricks and PySpark**, storing the processed data in the Silver layer.
+4. Built a **Gold star schema** consisting of fact and dimension tables using PySpark.
+5. Stored the Gold datasets as Parquet files in ADLS Gen2.
+6. Used **Azure Synapse Serverless SQL** to query the Gold Parquet files directly and expose SQL views.
+7. Connected the curated data to **Power BI** for reporting and analysis.
+
+As this is a data engineering project, my emphasis is primarily on the **data pipeline, cloud architecture, transformation, orchestration, and data modeling**, with less emphasis on dashboard development.
+
+The sections below explain the technologies, architecture, data model, and individual pipeline stages.
 
 ---
 
-## Architecture
+## Table of Contents
 
+- [Dataset Used](#dataset-used)
+- [Technologies](#technologies)
+- [Data Pipeline Architecture](#data-pipeline-architecture)
+- [Data Modeling](#data-modeling)
+- [Step 1: Incremental Data Ingestion](#step-1-incremental-data-ingestion)
+- [Step 2: Data Transformation](#step-2-data-transformation)
+- [Step 3: Gold Data Modeling](#step-3-gold-data-modeling)
+- [Step 4: Data Serving](#step-4-data-serving)
+- [Step 5: Analytics](#step-5-analytics)
+- [Data Validation](#data-validation)
+- [Project Structure](#project-structure)
 
-<img width="1293" height="548" alt="image" src="https://github.com/user-attachments/assets/78ede9ca-c2ff-45e6-bc4f-5e482df3b85d" />
+---
 
+## Dataset Used
+
+This project uses the **NYC Taxi & Limousine Commission (TLC) Yellow Taxi Trip Record Data**.
+
+The dataset contains information including:
+
+- Pickup and drop-off timestamps
+- Pickup and drop-off taxi zones
+- Trip distance
+- Passenger count
+- Rate code
+- Payment type
+- Fare amount
+- Tip amount
+- Tolls
+- Additional charges
+- Total trip amount
+
+NYC TLC publishes the trip data monthly in **Parquet format**, making it suitable for processing with Spark and other analytical technologies.
+
+### Data Source
+
+- [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+- [Yellow Taxi Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf)
+
+For this project, I used the **2026 Yellow Taxi monthly data**.
+
+---
+
+## Technologies
+
+The following technologies were used to build the project:
+
+| Area | Technology |
+|---|---|
+| Cloud Platform | Microsoft Azure |
+| Language | Python, SQL |
+| Orchestration | Azure Data Factory |
+| Data Lake | Azure Data Lake Storage Gen2 |
+| Data Processing | Databricks |
+| Transformation | PySpark |
+| Control / Audit | Azure SQL Database |
+| Data Serving | Azure Synapse Serverless SQL |
+| Storage Format | Parquet |
+| Visualization | Power BI |
+
+---
+
+## Data Pipeline Architecture
+
+The pipeline follows a **medallion architecture**, with ADLS Gen2 acting as the central data lake.
+
+```mermaid
 flowchart LR
 
     A["NYC TLC<br/>Yellow Taxi Data"]
@@ -19,22 +97,22 @@ flowchart LR
 
     C["Azure SQL Database<br/>Ingestion Control / Audit"]
 
-    D["ADLS Gen2<br/>Bronze<br/>Raw Parquet"]
+    D["ADLS Gen2<br/>Bronze"]
 
-    E["Databricks + PySpark<br/>Clean / Standardize / Transform"]
+    E["Databricks<br/>PySpark"]
 
-    F["ADLS Gen2<br/>Silver<br/>Cleaned Parquet"]
+    F["ADLS Gen2<br/>Silver"]
 
-    G["Databricks + PySpark<br/>Dimensional Modeling"]
+    G["Databricks<br/>PySpark"]
 
-    H["ADLS Gen2<br/>Gold<br/>Star Schema"]
+    H["ADLS Gen2<br/>Gold Star Schema"]
 
     I["Synapse Serverless SQL<br/>OPENROWSET + Views"]
 
-    J["Power BI<br/>Analytics"]
+    J["Power BI<br/>Dashboard"]
 
     A --> B
-    C -. "Load status / incremental control" .-> B
+    C -. "Incremental control" .-> B
     B --> D
     D --> E
     E --> F
@@ -42,118 +120,66 @@ flowchart LR
     G --> H
     H --> I
     I --> J
-
-    subgraph LAKE["Azure Data Lake Storage Gen2"]
-        D
-        F
-        H
-    end
 ```
----
 
-## Project Overview
-
-The goal of this project was to build a realistic cloud-based data engineering workflow around the **NYC TLC Yellow Taxi Trip Record Data**.
-
-Instead of loading the data directly into a reporting database, the pipeline separates ingestion, transformation, storage, and serving layers.
-
-### Pipeline
-
-1. **NYC TLC** provides monthly Yellow Taxi trip data in Parquet format.
-2. **Azure Data Factory** handles parameterized monthly ingestion.
-3. Raw files are stored in the **Bronze** layer of ADLS Gen2.
-4. **Databricks / PySpark** cleans and standardizes the data.
-5. Cleaned data is written to the **Silver** layer.
-6. PySpark creates a dimensional **Gold star schema**.
-7. Gold datasets are stored as Parquet in ADLS Gen2.
-8. **Synapse Serverless SQL** exposes the Parquet data through SQL views.
-9. **Power BI** connects to the Synapse SQL layer for reporting and analysis.
-
----
-
-## Technology Stack
-
-| Layer | Technology |
-|---|---|
-| Source | NYC TLC Yellow Taxi Trip Records |
-| Orchestration | Azure Data Factory |
-| Data Lake | Azure Data Lake Storage Gen2 |
-| Processing | Databricks |
-| Transformation | PySpark |
-| Control / Audit | Azure SQL Database |
-| Serving | Azure Synapse Serverless SQL |
-| Visualization | Power BI |
-| Storage Format | Parquet |
-| Compression | Snappy |
-| Programming | Python / SQL / PySpark |
-
----
-
-## Medallion Architecture
-
-### Bronze
-
-The Bronze layer contains the raw monthly source files received from the NYC TLC dataset.
-
-Example:
+### Pipeline Flow
 
 ```text
-bronze/
-└── yellow/
-    └── year=2026/
-        ├── month=1/
-        │   └── yellow_tripdata_2026-01.parquet
-        └── month=2/
-            └── yellow_tripdata_2026-02.parquet
+NYC TLC
+   │
+   ▼
+Azure Data Factory
+   │
+   ├──────────────► Azure SQL
+   │                Control / Audit
+   │
+   ▼
+ADLS Gen2 - Bronze
+   │
+   ▼
+Databricks / PySpark
+   │
+   ▼
+ADLS Gen2 - Silver
+   │
+   ▼
+Databricks / PySpark
+   │
+   ▼
+ADLS Gen2 - Gold
+   │
+   ▼
+Synapse Serverless SQL
+   │
+   ▼
+Power BI
 ```
-
-The Bronze layer preserves the source data before transformation.
 
 ---
 
-### Silver
+## Data Modeling
 
-The Silver layer contains cleaned and standardized data produced using PySpark.
+The Gold layer follows a **star schema** design.
 
-Transformations include:
-
-- Data type standardization
-- Null handling
-- Column cleanup
-- Trip duration calculation
-- Data quality filtering
-- Derived analytical fields
-- Source-month partitioning
-
-The actual pickup and drop-off timestamps are retained for analysis.
-
-Example:
+The central fact table contains trip-level information, while dimension tables provide reusable descriptive attributes.
 
 ```text
-silver/
-└── yellow/
-    └── year=2026/
-        └── month=1/
-            ├── part-00000-....snappy.parquet
-            ├── part-00001-....snappy.parquet
-            └── ...
+                       fact_taxi_trips
+                              │
+             ┌────────────────┼────────────────┐
+             │                │                │
+             ▼                ▼                ▼
+         dim_date         dim_zone       dim_payment
+                              │
+                              ▼
+                       dim_rate_code
 ```
-
-The Silver data is partitioned using the **source processing month**, rather than deriving storage partitions from individual trip timestamps.
-
-This keeps incremental processing aligned with the monthly source files.
-
----
-
-## Gold Layer
-
-The Gold layer converts the cleaned trip data into a **star schema** designed for analytics.
 
 ### Fact Table
 
 #### `fact_taxi_trips`
 
-Contains the individual taxi trip records and analytical measures.
+The fact table contains individual taxi trips and analytical measures.
 
 Key fields include:
 
@@ -170,8 +196,11 @@ passenger_count
 trip_distance
 trip_duration_minutes
 fare_amount
+extra
+mta_tax
 tip_amount
 tolls_amount
+improvement_surcharge
 total_amount
 congestion_surcharge
 Airport_fee
@@ -182,28 +211,19 @@ year
 month
 ```
 
-A deterministic `trip_id` is generated using a SHA-256 hash based on selected trip attributes.
-
----
+A deterministic `trip_id` is generated using a SHA-256 hash of selected trip attributes.
 
 ### Dimension Tables
 
-The Gold layer contains the following dimensions:
-
-```text
-dim_date
-dim_zone
-dim_payment
-dim_rate_code
-```
+The Gold layer contains four dimension tables:
 
 #### `dim_date`
 
-Provides calendar attributes for analytical reporting.
+Contains calendar information used for time-based analysis.
 
 #### `dim_zone`
 
-Contains NYC taxi zone information including:
+Contains NYC taxi zone information, including:
 
 - Location ID
 - Borough
@@ -212,15 +232,114 @@ Contains NYC taxi zone information including:
 
 #### `dim_payment`
 
-Provides payment type descriptions.
+Contains payment type information.
 
 #### `dim_rate_code`
 
-Provides rate code classifications.
+Contains rate code information.
 
 ---
 
-## Gold Storage Structure
+# Step 1: Incremental Data Ingestion
+
+The first stage of the pipeline uses **Azure Data Factory** to ingest monthly NYC TLC files into the Bronze layer.
+
+NYC TLC publishes trip records by month, so the pipeline was designed around a **year/month incremental processing pattern**.
+
+### Azure Data Factory
+
+The ADF pipeline is parameterized using the source year and month.
+
+For example:
+
+```text
+year = 2026
+month = 01
+```
+
+The pipeline uses these parameters to identify the corresponding source file and destination path.
+
+### Incremental Control
+
+An Azure SQL Database table is used to track ingestion status.
+
+Conceptually:
+
+```text
+ingestion_log
+
+year
+month
+status
+```
+
+This allows the pipeline to determine whether a particular source period has already been processed.
+
+The objective is to avoid reloading the same monthly data every time the pipeline runs.
+
+### Bronze Layer
+
+The raw source files are stored in ADLS Gen2.
+
+Example:
+
+```text
+bronze/
+└── yellow/
+    └── year=2026/
+        ├── month=1/
+        │   └── yellow_tripdata_2026-01.parquet
+        └── month=2/
+            └── yellow_tripdata_2026-02.parquet
+```
+
+The Bronze layer keeps the source data available before transformation.
+
+---
+
+# Step 2: Data Transformation
+
+After ingestion, the Bronze data is processed using **Databricks and PySpark**.
+
+The main transformation activities include:
+
+1. Reading the raw Parquet files from ADLS.
+2. Standardizing data types.
+3. Handling missing and invalid values.
+4. Cleaning the source columns.
+5. Calculating trip duration.
+6. Calculating tip percentage.
+7. Handling additional fare and surcharge fields.
+8. Preparing the dataset for dimensional modeling.
+9. Writing the processed data to the Silver layer.
+
+### Silver Layer
+
+The transformed data is stored as Parquet in ADLS Gen2.
+
+```text
+silver/
+└── yellow/
+    └── year=2026/
+        └── month=1/
+            ├── part-00000-....snappy.parquet
+            ├── part-00001-....snappy.parquet
+            └── ...
+```
+
+The data is partitioned according to the **source processing month**.
+
+The original pickup and drop-off timestamps are retained for analytical use rather than being used as the primary storage partitioning mechanism.
+
+---
+
+# Step 3: Gold Data Modeling
+
+The Silver data is then processed again using PySpark to create the Gold layer.
+
+The objective is to transform the cleaned dataset into a structure that is easier to query and consume from BI tools.
+
+### Gold Tables
 
 ```text
 gold/
@@ -229,61 +348,49 @@ gold/
 ├── dim_rate_code/
 ├── dim_zone/
 └── fact_taxi_trips/
-    └── year=2026/
-        └── month=1/
 ```
 
-The Gold layer remains stored as Parquet in ADLS rather than being copied into a separate physical warehouse table.
-
----
-
-## Incremental Processing
-
-The pipeline is designed around **monthly incremental ingestion**.
-
-The source dataset is naturally published by month, so the pipeline uses the source year/month as the processing boundary.
-
-An Azure SQL control table tracks ingestion status.
-
-Conceptually:
+The fact table is partitioned by year and month:
 
 ```text
-Azure Data Factory
-        │
-        ▼
-ingestion_log
-        │
-        ├── year
-        ├── month
-        ├── status
-        └── ingestion metadata
+fact_taxi_trips/
+└── year=2026/
+    └── month=1/
+        ├── part-00000-....snappy.parquet
+        ├── part-00001-....snappy.parquet
+        └── ...
 ```
 
-This allows the pipeline to determine which source periods have already been processed instead of treating every execution as a full reload.
+The dimension tables are stored separately.
 
 ---
 
-## Why Parquet?
+# Step 4: Data Serving
 
-Parquet was used throughout the data lake because it provides:
+Once the Gold layer was created, **Azure Synapse Serverless SQL** was used to provide a SQL interface over the Parquet data.
 
-- Columnar storage
-- Efficient analytical reads
-- Compression
-- Schema information
-- Compatibility with Spark and Synapse Serverless SQL
+Instead of copying the Gold data into another physical database, Synapse Serverless SQL queries the Parquet files directly from ADLS.
 
-The Gold layer can therefore be queried directly from ADLS without first loading the entire dataset into a traditional database.
+### External Data Source
 
----
+An external data source was configured to point to the ADLS container.
 
-## Synapse Serverless SQL
+The Gold datasets can then be queried using `OPENROWSET`.
 
-Azure Synapse Serverless SQL acts as the serving layer.
+For example:
 
-The Gold Parquet files are queried directly from ADLS using `OPENROWSET`.
+```sql
+SELECT *
+FROM OPENROWSET(
+    BULK 'gold/fact_taxi_trips/',
+    DATA_SOURCE = 'NYC_TAXI_ADLS',
+    FORMAT = 'PARQUET'
+) AS result;
+```
 
-Views were created to provide a cleaner SQL interface:
+### SQL Views
+
+Views were created to provide a cleaner interface for Power BI:
 
 ```text
 gold.v_fact_taxi_trips
@@ -293,55 +400,50 @@ gold.v_dim_payment
 gold.v_dim_rate_code
 ```
 
-This separates the physical Parquet storage from the analytical SQL interface consumed by Power BI.
+This separates the physical Parquet storage from the SQL interface used by the reporting layer.
 
 ---
 
-## Data Validation
+# Step 5: Analytics
 
-The pipeline was validated by comparing the Databricks Gold outputs with the Synapse Serverless SQL views.
+The final Gold datasets are exposed through Synapse Serverless SQL and connected to **Power BI**.
 
-Current January 2026 validation:
+The dashboard focuses on analytical views of the taxi data, including areas such as:
+
+- Trip volume
+- Revenue
+- Trip distance
+- Trip duration
+- Payment methods
+- Pickup and drop-off zones
+- Taxi activity over time
+- Fare and tip metrics
+
+The dashboard is intentionally kept secondary to the data engineering components of the project.
+
+---
+
+# Data Validation
+
+The Gold datasets were validated in Databricks and then queried again through Synapse Serverless SQL.
+
+For the January 2026 dataset:
 
 | Dataset | Records |
 |---|---:|
-| Fact Taxi Trips | 3,684,871 |
-| Date Dimension | 33 |
-| Zone Dimension | 265 |
-| Payment Dimension | 5 |
-| Rate Code Dimension | 7 |
+| `fact_taxi_trips` | 3,684,871 |
+| `dim_date` | 33 |
+| `dim_zone` | 265 |
+| `dim_payment` | 5 |
+| `dim_rate_code` | 7 |
 
-The fact count matched between the Databricks transformation layer and Synapse SQL serving layer.
-
----
-
-## Data Engineering Concepts Demonstrated
-
-This project demonstrates practical experience with:
-
-- Cloud data lake architecture
-- Medallion architecture
-- ETL / ELT pipelines
-- Incremental ingestion
-- Parameterized Azure Data Factory pipelines
-- ADLS Gen2
-- PySpark transformations
-- Parquet data processing
-- Data quality handling
-- Dimensional modeling
-- Star schemas
-- Fact and dimension tables
-- Serverless SQL
-- SQL views over data lake files
-- Data validation
-- Analytical data modeling
-- Power BI integration
+The fact and dimension counts were checked between the transformation layer and Synapse serving layer to confirm that the data was transferred correctly.
 
 ---
 
-## Repository Structure
+# Project Structure
 
-A suggested repository structure:
+The repository is organized around the major components of the pipeline.
 
 ```text
 nyc-taxi-azure-data-engineering/
@@ -367,88 +469,39 @@ nyc-taxi-azure-data-engineering/
 │   └── screenshots/
 │
 ├── docs/
-│   └── architecture.mmd
+│   └── architecture.png
 │
 └── README.md
 ```
 
 ---
 
-## Project Workflow
+# Key Data Engineering Concepts
 
-```text
-Source
-  │
-  ▼
-NYC TLC Monthly Parquet
-  │
-  ▼
-Azure Data Factory
-  │
-  ├──────────────► Azure SQL
-  │                 Control / Audit
-  │
-  ▼
-ADLS Bronze
-  │
-  ▼
-Databricks / PySpark
-  │
-  ▼
-ADLS Silver
-  │
-  ▼
-Databricks / PySpark
-  │
-  ▼
-Gold Star Schema
-  │
-  ├── fact_taxi_trips
-  ├── dim_date
-  ├── dim_zone
-  ├── dim_payment
-  └── dim_rate_code
-  │
-  ▼
-ADLS Gold
-  │
-  ▼
-Synapse Serverless SQL
-  │
-  ▼
-Power BI
-```
+This project demonstrates practical implementation of:
+
+- Azure Data Factory orchestration
+- Parameterized pipelines
+- Incremental data ingestion
+- Azure Data Lake Storage Gen2
+- Medallion architecture
+- Databricks
+- PySpark
+- Parquet
+- Data cleaning and transformation
+- Dimensional modeling
+- Star schema
+- Fact and dimension tables
+- Azure SQL control tables
+- Synapse Serverless SQL
+- `OPENROWSET`
+- SQL views
+- Power BI integration
 
 ---
 
-## Key Design Decisions
+## Conclusion
 
-### Source-month partitioning
+This project demonstrates an end-to-end Azure data engineering workflow, from **monthly source ingestion through cloud storage, PySpark transformation, dimensional modeling, serverless SQL serving, and BI reporting**.
 
-The pipeline uses the source file's year/month as the storage partition boundary.
-
-This avoids unnecessarily deriving storage partitions from the actual trip timestamp while still retaining the original pickup and drop-off timestamps for analytics.
-
-### Data lake as the primary storage layer
-
-Instead of moving every transformation into SQL tables, the project keeps Bronze, Silver, and Gold data in ADLS using Parquet.
-
-This provides a clear separation between storage, transformation, and serving.
-
-### Serverless serving layer
-
-Synapse Serverless SQL provides a SQL interface over the Gold Parquet files without requiring a dedicated data warehouse for the project.
-
-### Star schema
-
-The Gold layer separates trip-level facts from reusable dimensions, making the resulting dataset easier to consume from BI tools.
-
----
-
-## Data Source
-
-NYC Taxi & Limousine Commission — Trip Record Data
-
-[NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page?utm_source=chatgpt.com)
-
-The project uses the publicly available NYC Yellow Taxi trip record data for the pipeline demonstration.
+The main focus was on building a pipeline that can handle **incremental monthly data**, maintain separate Bronze, Silver, and Gold layers, and expose the curated data through a SQL interface for downstream analytics.
