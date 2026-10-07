@@ -1,4 +1,4 @@
-# 🚕 NYC Taxi Data Engineering End-to-End Project — Azure
+# 🚕 Data Engineering End-to-End Project — Azure
 
 ## Objective
 
@@ -6,7 +6,7 @@ In this project, I designed and implemented an end-to-end data engineering pipel
 
 The pipeline consists of several stages:
 
-1. Extracted monthly NYC Yellow Taxi trip data and ingested it into **Azure Data Lake Storage Gen2** using **Azure Data Factory**.
+1. Extracted monthly Yellow Taxi trip data and ingested it into **Azure Data Lake Storage Gen2** using **Azure Data Factory**.
 2. Implemented parameterized and incremental ingestion using **Azure SQL Database** as a control and audit table.
 3. Cleaned and transformed the data using **Databricks and PySpark**, storing the processed data in the Silver layer.
 4. Built a **Gold star schema** consisting of fact and dimension tables using PySpark.
