@@ -8,6 +8,9 @@ The project processes monthly NYC Yellow Taxi trip data using a **medallion arch
 
 ## Architecture
 
+
+<img width="1293" height="548" alt="image" src="https://github.com/user-attachments/assets/78ede9ca-c2ff-45e6-bc4f-5e482df3b85d" />
+
 flowchart LR
 
     A["NYC TLC<br/>Yellow Taxi Data"]
