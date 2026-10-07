@@ -263,7 +263,11 @@ month = 01
 
 The pipeline uses these parameters to identify the corresponding source file and destination path.
 
+<img width="1330" height="615" alt="image" src="https://github.com/user-attachments/assets/7585a83a-283e-4ce8-a8b8-1e3157cfe617" />
+
 ### Incremental Control
+
+<img width="1541" height="779" alt="image" src="https://github.com/user-attachments/assets/81929ea2-63e8-470e-85a3-baa26dc41543" />
 
 An Azure SQL Database table is used to track ingestion status.
 
@@ -317,6 +321,8 @@ The main transformation activities include:
 8. Preparing the dataset for dimensional modeling.
 9. Writing the processed data to the Silver layer.
 
+<img width="1319" height="873" alt="image" src="https://github.com/user-attachments/assets/a96d4de3-aa0b-4455-b66e-ae530928a0bc" />
+
 ### Silver Layer
 
 The transformed data is stored as Parquet in ADLS Gen2.
@@ -334,6 +340,8 @@ silver/
 The data is partitioned according to the **source processing month**.
 
 The original pickup and drop-off timestamps are retained for analytical use rather than being used as the primary storage partitioning mechanism.
+
+<img width="976" height="515" alt="image" src="https://github.com/user-attachments/assets/12fb2268-f02d-43d8-a811-c6aea431414b" />
 
 ---
 
