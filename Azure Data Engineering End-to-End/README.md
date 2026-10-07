@@ -86,6 +86,10 @@ The following technologies were used to build the project:
 
 ## Data Pipeline Architecture
 
+Data Flow Overview 
+
+<img width="1293" height="548" alt="image" src="https://github.com/user-attachments/assets/78ede9ca-c2ff-45e6-bc4f-5e482df3b85d" />
+
 The pipeline follows a **medallion architecture**, with ADLS Gen2 acting as the central data lake.
 
 ```mermaid
