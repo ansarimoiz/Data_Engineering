@@ -1,9 +1,6 @@
 # Formula 1 Lakehouse: Metadata-Driven Medallion Pipeline on Microsoft Fabric
 
 A batch ETL pipeline over Formula 1 race data, rebuilt from a 16-task Azure Databricks job into a **metadata-driven** design on Microsoft Fabric. Bronze, silver and gold layers are each driven by a few generic, parameterized notebooks that read their instructions from Delta config tables. Adding a table is a metadata change, not a code change.
-
-![Pipeline canvas](docs/images/pipeline-canvas.png)
-
 ## Why metadata-driven
 
 The original Databricks project had one ingest task and one transform task per entity (circuits, races, constructors, drivers, results, sprints). The code was nearly identical across them; only paths, schemas and column names differed.
@@ -17,7 +14,8 @@ The original Databricks project had one ingest task and one transform task per e
 | Gold logic | One notebook per model | SQL stored in `meta_gold_models` |
 | Observability | None | `meta_run_log` (status, rows, timings, errors) |
 
-![Original Databricks DAG](docs/images/databricks-dag.png)
+<img width="589" height="577" alt="image" src="https://github.com/user-attachments/assets/975aaae9-cda5-4e41-b9b9-8b4c3c967907" />
+
 
 ## Architecture
 
@@ -64,8 +62,10 @@ flowchart LR
 | circuits | `circuitName` | `circuit_name` | string | initcap |
 | drivers | `concat_ws(' ', name.givenName, name.familyName)` | `driver_name` | string | initcap |
 
-![meta_entities](docs/images/meta-entities.png)
-![meta_columns](docs/images/meta-columns.png)
+<img width="1323" height="245" alt="image" src="https://github.com/user-attachments/assets/e0d9f26c-9506-48b1-944a-9029d3ff46a2" />
+
+<img width="801" height="505" alt="image" src="https://github.com/user-attachments/assets/6d7bcdb9-2cfa-4fca-85b1-03bad3cf755a" />
+
 
 ## How each layer works
 
@@ -113,9 +113,9 @@ Get Entities (Lookup) -> Filter Active -> ForEach Entity -> Build Gold
 - The ForEach runs the bronze and silver notebooks for each entity, with entities in parallel.
 - Gold runs once, after every entity has finished.
 - `@pipeline().RunId` is passed as `batch_id`, so every log row and bronze row ties back to a pipeline run.
+ 
+<img width="1189" height="285" alt="image" src="https://github.com/user-attachments/assets/e9147c55-4f01-4a14-bb21-5081d7f18873" />
 
-![ForEach activities](docs/images/foreach-inner.png)
-![Pipeline run](docs/images/pipeline-run.png)
 
 ## Run observability
 
