@@ -1,6 +1,6 @@
 # Formula 1 Lakehouse: Metadata-Driven Medallion Pipeline on Microsoft Fabric
 
-A batch ETL pipeline over Formula 1 race data, rebuilt from a 16-task Azure Databricks job into a **metadata-driven** design on Microsoft Fabric. Bronze, silver and gold layers are each driven by a few generic, parameterized notebooks that read their instructions from Delta config tables. Adding a table is a metadata change, not a code change.
+A batch ETL pipeline over Formula 1 race data, rebuilt from a 16-task Azure Databricks job into a **metadata-driven** design on Microsoft Fabric. Bronze, silver and gold layers are each driven by a few generic, parameterized notebooks that read their instructions from Delta config tables. 
 ## Why metadata-driven
 
 The original Databricks project had one ingest task and one transform task per entity (circuits, races, constructors, drivers, results, sprints). The code was nearly identical across them; only paths, schemas and column names differed.
